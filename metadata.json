@@ -1,0 +1,6 @@
+{
+  "name": "Aurum Privé",
+  "description": "Plataforma exclusiva de videochamadas privadas pagas entre clientes e profissionais credenciados.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

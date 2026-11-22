@@ -1,0 +1,1233 @@
+# PROMPT MASTER — PLATAFORMA DE VIDEOCHAMADAS PRIVADAS PAGAS
+
+## PROJETO: PLATAFORMA DE CONEXÕES PRIVADAS COM PROFISSIONAIS
+
+Quero que você atue como um desenvolvedor Full Stack Sênior, arquiteto de software, especialista em UI/UX, Supabase, PostgreSQL, segurança, pagamentos online e sistemas de vídeo em tempo real.
+
+Crie uma plataforma web completa, moderna, responsiva e funcional para videochamadas privadas pagas entre clientes (internautas) e profissionais cadastrados na plataforma.
+
+Não quero apenas um layout demonstrativo ou protótipo estático. Quero uma aplicação funcional, preparada para integração real, com banco de dados Supabase, autenticação, armazenamento, regras de segurança, gerenciamento de pagamentos, videochamadas e painéis administrativos.
+
+---
+
+# 1. OBJETIVO DA PLATAFORMA
+
+A plataforma permitirá que clientes conheçam profissionais cadastrados, escolham um profissional de sua preferência e paguem para ter acesso a uma videochamada privativa, individual e exclusiva.
+
+Cada profissional terá seu próprio ambiente de trabalho, podendo gerenciar seus clientes, visualizar seus atendimentos, acompanhar seus ganhos, organizar sua disponibilidade e administrar sua agenda.
+
+Todos os profissionais serão cadastrados, aprovados, configurados e administrados pelo ADMINISTRADOR PRINCIPAL da plataforma.
+
+O administrador será o proprietário do sistema e terá controle total sobre:
+
+- Cadastro de profissionais.
+- Aprovação, bloqueio e exclusão de profissionais.
+- Cadastro e edição dos perfis.
+- Definição de valores cobrados por atendimento.
+- Definição de duração das chamadas.
+- Percentual de comissão da plataforma.
+- Controle de pagamentos.
+- Controle de repasses.
+- Gestão dos clientes.
+- Gestão das videochamadas.
+- Relatórios financeiros.
+- Configurações gerais.
+- Logs de atividades.
+- Segurança da plataforma.
+
+---
+
+# 2. TECNOLOGIAS OBRIGATÓRIAS
+
+Utilize uma arquitetura moderna e organizada:
+
+- Frontend: React.
+- Linguagem: TypeScript.
+- Interface: Tailwind CSS.
+- Componentes: biblioteca moderna de UI, como shadcn/ui.
+- Backend e banco de dados: Supabase.
+- Banco: PostgreSQL.
+- Autenticação: Supabase Auth.
+- Armazenamento de imagens: Supabase Storage.
+- Segurança: Supabase RLS (Row Level Security).
+- Funções backend: Supabase Edge Functions.
+- Videochamadas: integração com LiveKit, Daily ou outra tecnologia WebRTC profissional, preferencialmente LiveKit.
+- Pagamentos: estrutura preparada para Mercado Pago, Stripe ou outro gateway compatível, com preferência por Mercado Pago para pagamentos brasileiros.
+- Notificações: sistema de notificações internas e estrutura preparada para e-mail.
+- Realtime: Supabase Realtime quando necessário.
+
+Não simule operações financeiras como se fossem reais. Se um serviço externo ainda não estiver configurado, crie sua integração estrutural, identifique claramente o que está pendente e disponibilize modo de testes.
+
+---
+
+# 3. IDENTIDADE VISUAL E DESIGN
+
+Crie um site com visual premium, sofisticado, moderno e profissional.
+
+Características:
+
+- Design elegante e minimalista.
+- Aparência de plataforma exclusiva.
+- Fundo escuro sofisticado, preferencialmente preto, grafite ou azul profundo.
+- Detalhes em dourado suave, champagne, branco e tons neutros.
+- Cards com acabamento premium.
+- Tipografia moderna.
+- Ícones elegantes.
+- Animações suaves.
+- Transições discretas.
+- Excelente experiência mobile e desktop.
+- Interface de navegação intuitiva.
+- Layout com excelente espaçamento e hierarquia visual.
+- Dashboard com gráficos e indicadores.
+- Modalidades de acesso bem organizadas.
+- Fotos de perfil com boa apresentação.
+- Componentes reutilizáveis.
+
+Evite visual genérico de template. A plataforma deve transmitir exclusividade, segurança, tecnologia e profissionalismo.
+
+---
+
+# 4. TIPOS DE USUÁRIOS E PERMISSÕES
+
+Crie 3 níveis principais de usuários:
+
+## A. ADMINISTRADOR
+
+O administrador tem controle absoluto sobre o sistema.
+
+Permissões:
+
+- Acessar o painel administrativo.
+- Criar profissionais.
+- Editar profissionais.
+- Aprovar profissionais.
+- Ativar e desativar profissionais.
+- Bloquear contas.
+- Criar login e senha ou convidar profissionais.
+- Alterar dados dos profissionais.
+- Definir valores por minuto, sessão ou pacote.
+- Definir duração das chamadas.
+- Definir comissões.
+- Visualizar todos os clientes.
+- Visualizar todos os pagamentos.
+- Visualizar todas as videochamadas.
+- Visualizar faturamento total.
+- Visualizar valores devidos aos profissionais.
+- Controlar saques e repasses.
+- Gerenciar estornos.
+- Gerenciar reclamações.
+- Criar promoções.
+- Configurar cupons.
+- Configurar regras da plataforma.
+- Visualizar relatórios.
+- Gerenciar configurações do sistema.
+
+O administrador deve ter um painel exclusivo e protegido.
+
+## B. PROFISSIONAL
+
+Cada profissional terá uma conta individual, criada ou autorizada pelo administrador.
+
+O profissional não poderá criar livremente uma conta pública de profissional sem aprovação administrativa.
+
+Cada profissional terá acesso somente ao seu ambiente.
+
+Funcionalidades:
+
+- Visualizar seu perfil.
+- Editar informações permitidas.
+- Adicionar foto de perfil.
+- Adicionar fotos de apresentação autorizadas.
+- Escrever uma descrição profissional.
+- Visualizar sua agenda.
+- Configurar disponibilidade.
+- Definir status online, offline ou ocupado, conforme regras autorizadas.
+- Receber solicitações de videochamadas.
+- Aceitar ou recusar chamadas, quando aplicável.
+- Visualizar seus clientes.
+- Consultar histórico de atendimentos.
+- Consultar chamadas realizadas.
+- Visualizar duração das chamadas.
+- Visualizar valores recebidos.
+- Visualizar comissões descontadas.
+- Visualizar saldo disponível.
+- Visualizar saldo pendente.
+- Consultar histórico de pagamentos.
+- Solicitar saque, caso o sistema permita.
+- Receber notificações.
+
+O profissional não pode acessar dados financeiros, clientes, configurações ou atendimentos de outros profissionais.
+
+## C. CLIENTE
+
+O cliente poderá:
+
+- Criar uma conta.
+- Fazer login.
+- Editar seu perfil.
+- Visualizar profissionais disponíveis.
+- Pesquisar profissionais.
+- Filtrar profissionais.
+- Ver fotos de perfil.
+- Ver descrição.
+- Ver preço da sessão.
+- Ver duração.
+- Ver disponibilidade.
+- Favoritar profissionais.
+- Escolher um profissional.
+- Comprar créditos ou pagar por sessão.
+- Agendar atendimento, quando disponível.
+- Solicitar chamada imediata, se o profissional estiver online.
+- Entrar na sala privada após autorização.
+- Visualizar seus pagamentos.
+- Visualizar histórico de chamadas.
+- Cancelar agendamentos de acordo com as regras.
+- Receber notificações.
+- Avaliar atendimentos, se autorizado pela plataforma.
+
+O cliente jamais poderá acessar salas de videochamada sem autorização e pagamento confirmado, quando o pagamento for exigido.
+
+---
+
+# 5. SITE PÚBLICO — PÁGINA INICIAL
+
+Criar uma página inicial sofisticada com:
+
+## Header
+
+- Logo da plataforma.
+- Início.
+- Profissionais.
+- Como funciona.
+- Login.
+- Criar conta.
+- Botão de destaque: "Encontrar profissional".
+
+## Hero Section
+
+Criar uma seção inicial de alto impacto com:
+
+- Imagem elegante.
+- Título forte.
+- Subtítulo explicativo.
+- Botão para conhecer profissionais.
+- Botão para cadastro.
+
+Sugestão de mensagem:
+
+"Conexões exclusivas. Conversas privadas. Experiências personalizadas."
+
+Texto complementar:
+
+"Escolha o profissional, reserve seu momento e tenha uma experiência individual em um ambiente privado, seguro e exclusivo."
+
+## Seção de profissionais
+
+Mostrar profissionais em cards contendo:
+
+- Foto.
+- Nome ou nome profissional.
+- Categoria.
+- Descrição curta.
+- Status de disponibilidade.
+- Valor da chamada.
+- Duração.
+- Botão "Ver perfil".
+- Botão "Agendar".
+- Botão "Conversar agora", se disponível.
+
+## Seção como funciona
+
+Mostrar em 4 passos:
+
+1. Escolha seu profissional.
+2. Selecione o tipo de atendimento.
+3. Realize o pagamento.
+4. Acesse sua videochamada privada.
+
+## Seção de segurança
+
+Informar que:
+
+- As chamadas são privadas.
+- O acesso é individual e controlado.
+- Os dados dos usuários são protegidos.
+- Os pagamentos são processados por meios seguros.
+- As chamadas não são gravadas por padrão.
+
+## Footer
+
+- Termos de uso.
+- Política de privacidade.
+- Política de cancelamento.
+- Contato.
+- Suporte.
+- Redes sociais.
+- Direitos autorais.
+
+---
+
+# 6. CATÁLOGO DE PROFISSIONAIS
+
+Criar página dedicada com filtros e pesquisa.
+
+Filtros:
+
+- Nome.
+- Categoria.
+- Disponibilidade.
+- Faixa de preço.
+- Atendimento imediato.
+- Agendamento.
+
+Cada card deve ter visual premium e permitir entrar no perfil completo.
+
+Criar uma página individual para cada profissional com:
+
+- Foto de perfil.
+- Galeria autorizada.
+- Nome profissional.
+- Descrição completa.
+- Especialidade ou categoria.
+- Idiomas.
+- Status.
+- Valor por sessão.
+- Valor por minuto, se habilitado.
+- Duração das sessões.
+- Horários disponíveis.
+- Avaliações.
+- Botão para agendar.
+- Botão para chamada imediata.
+
+---
+
+# 7. SISTEMA DE VIDEOCHAMADAS PRIVADAS
+
+Esta é uma das funcionalidades mais importantes do projeto.
+
+Implementar videochamadas individuais com tecnologia WebRTC, utilizando preferencialmente LiveKit.
+
+Cada chamada deve possuir:
+
+- Identificador único.
+- Cliente identificado.
+- Profissional identificado.
+- Sala privada.
+- Token temporário de acesso.
+- Horário de início.
+- Horário de término.
+- Duração.
+- Status.
+- Valor cobrado.
+- Registro financeiro.
+- Controle de acesso.
+
+Status possíveis:
+
+- aguardando_pagamento
+- pagamento_confirmado
+- aguardando_profissional
+- aguardando_cliente
+- iniciando
+- em_andamento
+- finalizada
+- cancelada
+- recusada
+- expirou
+- falha
+
+## Regras das videochamadas
+
+1. Cada sala deve ser privada.
+2. Somente cliente e profissional autorizados podem entrar.
+3. O administrador poderá visualizar os registros e status das chamadas.
+4. O token da sala deve ser gerado no backend.
+5. Não expor credenciais LiveKit no frontend.
+6. A sala deve ser encerrada quando o tempo contratado terminar, de acordo com as regras de cobrança.
+7. O sistema deve impedir que terceiros acessem uma sala.
+8. Criar controles para microfone, câmera, encerramento e conexão.
+9. Exibir cronômetro da sessão.
+10. Exibir informações do profissional e do cliente.
+11. Exibir estados de conexão.
+12. Tratar desconexões.
+13. Permitir reconexão durante um intervalo configurável.
+14. Registrar a duração real da sessão.
+15. Não gravar áudio ou vídeo por padrão.
+16. A gravação, caso seja implementada futuramente, deve depender de consentimento explícito e regras legais.
+
+Criar uma interface de chamada premium, em tela cheia, com:
+
+- Vídeo principal.
+- Vídeo secundário.
+- Controles de câmera.
+- Controles de microfone.
+- Botão encerrar chamada.
+- Cronômetro.
+- Indicador de conexão.
+- Nome do participante.
+- Mensagem de conexão.
+- Layout adaptável para celular.
+
+---
+
+# 8. SISTEMA DE PAGAMENTOS
+
+Criar um sistema financeiro completo, preparado para gateway de pagamentos.
+
+Preferência inicial por Mercado Pago, considerando o mercado brasileiro.
+
+Métodos que poderão ser disponibilizados, conforme integração:
+
+- PIX.
+- Cartão de crédito.
+- Cartão de débito, se suportado.
+- Outros métodos habilitados pelo gateway.
+
+## Modelo de cobrança configurável
+
+O administrador poderá escolher:
+
+- Cobrança por sessão.
+- Cobrança por duração fixa.
+- Cobrança por minuto.
+- Pacotes pré-pagos.
+- Créditos para chamadas.
+- Preços diferenciados por profissional.
+
+## Fluxo financeiro
+
+1. Cliente escolhe o profissional.
+2. Cliente escolhe a sessão.
+3. Sistema calcula o valor.
+4. Cliente efetua o pagamento.
+5. Gateway confirma o pagamento via webhook.
+6. Backend verifica a autenticidade do webhook.
+7. O pagamento é marcado como confirmado.
+8. Sistema autoriza o agendamento ou a chamada.
+9. A chamada é realizada.
+10. Sistema registra o valor bruto.
+11. Sistema calcula a comissão da plataforma.
+12. Sistema calcula o valor do profissional.
+13. Valores são registrados no ledger financeiro.
+
+Não considerar um pagamento confirmado apenas porque o frontend informou que o pagamento foi realizado.
+
+Utilizar webhook verificado pelo backend.
+
+## Exemplo de configuração
+
+Exemplo ilustrativo:
+
+- Sessão de 15 minutos: R$ 50,00.
+- Comissão da plataforma: 30%.
+- Comissão do profissional: 70%.
+
+Esses valores devem ser editáveis pelo administrador e não podem ser fixados no código.
+
+---
+
+# 9. SISTEMA DE COMISSÕES E REPASSES
+
+Criar sistema financeiro que permita:
+
+- Definir comissão global.
+- Definir comissão individual por profissional.
+- Calcular automaticamente a comissão.
+- Calcular saldo do profissional.
+- Registrar saldo pendente.
+- Registrar saldo liberado.
+- Registrar saldo pago.
+- Criar solicitações de saque.
+- Aprovar saques.
+- Recusar saques.
+- Registrar pagamentos de repasses.
+- Consultar histórico completo.
+
+Exemplo:
+
+Sessão de R$ 100,00.
+
+- Valor bruto: R$ 100,00.
+- Comissão da plataforma: R$ 30,00.
+- Valor do profissional: R$ 70,00.
+
+Todos os valores precisam ter rastreabilidade.
+
+Não permitir que o profissional altere seu próprio saldo.
+
+Não permitir que o cliente altere registros financeiros.
+
+---
+
+# 10. PAINEL ADMINISTRATIVO
+
+Criar painel administrativo completo com sidebar.
+
+Menu:
+
+- Dashboard.
+- Profissionais.
+- Clientes.
+- Videochamadas.
+- Agendamentos.
+- Pagamentos.
+- Comissões.
+- Repasses.
+- Solicitações de saque.
+- Cupons.
+- Avaliações.
+- Relatórios.
+- Notificações.
+- Configurações.
+- Auditoria.
+- Sair.
+
+## Dashboard administrativo
+
+Mostrar:
+
+- Total de profissionais.
+- Profissionais ativos.
+- Profissionais online.
+- Total de clientes.
+- Clientes novos.
+- Chamadas realizadas.
+- Chamadas em andamento.
+- Chamadas canceladas.
+- Faturamento bruto.
+- Receita da plataforma.
+- Valores destinados aos profissionais.
+- Pagamentos pendentes.
+- Repasses pendentes.
+- Taxa de conversão.
+- Gráfico de faturamento diário, semanal e mensal.
+- Gráfico de chamadas.
+- Ranking de profissionais por faturamento.
+- Ranking de profissionais por quantidade de atendimentos.
+
+Todos os indicadores devem buscar dados reais no Supabase.
+
+---
+
+# 11. AMBIENTE EXCLUSIVO DO PROFISSIONAL
+
+Criar painel individual.
+
+Sidebar:
+
+- Meu dashboard.
+- Meu perfil.
+- Minha disponibilidade.
+- Minha agenda.
+- Chamadas.
+- Clientes.
+- Financeiro.
+- Saldo.
+- Saques.
+- Avaliações.
+- Notificações.
+- Configurações.
+
+Dashboard do profissional:
+
+- Total de atendimentos.
+- Atendimentos realizados.
+- Atendimentos futuros.
+- Tempo total de chamadas.
+- Ganhos hoje.
+- Ganhos no mês.
+- Saldo disponível.
+- Saldo pendente.
+- Gráfico de ganhos.
+- Histórico de atendimentos.
+
+Criar calendário de disponibilidade.
+
+O profissional poderá configurar:
+
+- Dias de atendimento.
+- Horários.
+- Intervalos.
+- Bloqueios.
+- Férias.
+- Disponibilidade para chamadas imediatas.
+
+O administrador poderá visualizar e, quando necessário, editar todas essas informações.
+
+---
+
+# 12. CLIENTES E CRM
+
+Criar sistema de gerenciamento de clientes.
+
+O profissional poderá visualizar somente clientes que tenham interagido ou realizado atendimentos com ele, conforme as permissões definidas.
+
+Dados:
+
+- Nome.
+- E-mail.
+- Data de cadastro.
+- Último atendimento.
+- Total de atendimentos.
+- Total gasto.
+- Histórico de sessões.
+- Observações privadas do profissional, se permitido.
+
+As observações privadas devem ser acessíveis apenas ao profissional responsável e ao administrador, conforme regras de segurança.
+
+Não permitir compartilhamento indevido entre profissionais.
+
+---
+
+# 13. AGENDAMENTOS
+
+Criar sistema de agendamento.
+
+Fluxo:
+
+1. Cliente escolhe profissional.
+2. Visualiza disponibilidade.
+3. Seleciona data e horário.
+4. Escolhe duração.
+5. Realiza pagamento.
+6. Agendamento é confirmado.
+7. Cliente e profissional recebem notificação.
+8. Sistema disponibiliza acesso à sala no horário permitido.
+
+Regras:
+
+- Evitar conflito de horário.
+- Não permitir dois agendamentos no mesmo horário para o mesmo profissional.
+- Configurar antecedência mínima.
+- Configurar cancelamento.
+- Configurar tolerância de atraso.
+- Configurar reagendamento.
+- Configurar expiração.
+- Criar lembretes automáticos.
+
+---
+
+# 14. NOTIFICAÇÕES
+
+Criar sistema de notificações para:
+
+- Novo agendamento.
+- Pagamento confirmado.
+- Pagamento recusado.
+- Chamada próxima.
+- Profissional online.
+- Solicitação de chamada.
+- Chamada aceita.
+- Chamada recusada.
+- Chamada encerrada.
+- Saldo atualizado.
+- Saque solicitado.
+- Saque aprovado.
+- Saque recusado.
+- Avisos administrativos.
+
+Implementar notificações dentro da plataforma.
+
+Deixar estrutura preparada para notificações por e-mail.
+
+---
+
+# 15. BANCO DE DADOS SUPABASE
+
+Crie banco de dados PostgreSQL no Supabase com estrutura organizada, normalizada e preparada para crescimento.
+
+Criar migrations SQL para as seguintes tabelas:
+
+## profiles
+
+Dados gerais dos usuários.
+
+Campos:
+
+- id (UUID, relacionado ao auth.users).
+- full_name.
+- email.
+- phone.
+- avatar_url.
+- user_role.
+- status.
+- created_at.
+- updated_at.
+
+Tipos de usuário:
+
+- admin.
+- professional.
+- client.
+
+## professionals
+
+Dados específicos dos profissionais.
+
+Campos:
+
+- id.
+- user_id.
+- professional_name.
+- slug.
+- bio.
+- category.
+- languages.
+- profile_image.
+- gallery.
+- price_per_session.
+- price_per_minute.
+- session_duration.
+- commission_percentage.
+- availability_status.
+- is_approved.
+- is_featured.
+- created_at.
+- updated_at.
+
+## clients
+
+Dados específicos dos clientes.
+
+Campos:
+
+- id.
+- user_id.
+- created_at.
+- updated_at.
+
+## professional_availability
+
+- id.
+- professional_id.
+- day_of_week.
+- start_time.
+- end_time.
+- is_available.
+
+## bookings
+
+- id.
+- client_id.
+- professional_id.
+- scheduled_at.
+- duration_minutes.
+- amount.
+- status.
+- cancellation_reason.
+- created_at.
+- updated_at.
+
+## video_calls
+
+- id.
+- booking_id.
+- client_id.
+- professional_id.
+- room_name.
+- call_status.
+- started_at.
+- ended_at.
+- duration_seconds.
+- amount.
+- created_at.
+
+## payments
+
+- id.
+- client_id.
+- booking_id.
+- provider.
+- provider_payment_id.
+- amount.
+- currency.
+- status.
+- payment_method.
+- paid_at.
+- refunded_at.
+- created_at.
+
+## financial_transactions
+
+Criar ledger financeiro com registros imutáveis.
+
+Campos:
+
+- id.
+- payment_id.
+- professional_id.
+- client_id.
+- booking_id.
+- transaction_type.
+- gross_amount.
+- platform_fee.
+- professional_amount.
+- currency.
+- status.
+- created_at.
+
+## professional_balances
+
+- id.
+- professional_id.
+- available_balance.
+- pending_balance.
+- paid_balance.
+- updated_at.
+
+## payout_requests
+
+- id.
+- professional_id.
+- amount.
+- payout_method.
+- payout_details.
+- status.
+- requested_at.
+- approved_at.
+- paid_at.
+- admin_notes.
+
+## reviews
+
+- id.
+- client_id.
+- professional_id.
+- booking_id.
+- rating.
+- comment.
+- status.
+- created_at.
+
+## favorites
+
+- id.
+- client_id.
+- professional_id.
+- created_at.
+
+## coupons
+
+- id.
+- code.
+- discount_type.
+- discount_value.
+- usage_limit.
+- expiration_date.
+- is_active.
+
+## notifications
+
+- id.
+- user_id.
+- title.
+- message.
+- type.
+- read_at.
+- created_at.
+
+## platform_settings
+
+- id.
+- setting_key.
+- setting_value.
+- updated_at.
+
+## audit_logs
+
+- id.
+- actor_user_id.
+- action.
+- entity_type.
+- entity_id.
+- metadata.
+- created_at.
+
+Criar:
+
+- Primary keys.
+- Foreign keys.
+- Índices.
+- Constraints.
+- Relacionamentos.
+- Enums ou tipos consistentes.
+- Triggers de updated_at.
+- Triggers ou funções necessárias para cálculos.
+- Migrations organizadas.
+- Dados de demonstração seguros.
+
+Não duplicar dados desnecessariamente.
+
+---
+
+# 16. SEGURANÇA DO SUPABASE
+
+Segurança é prioridade.
+
+Implementar:
+
+- Row Level Security (RLS) em todas as tabelas expostas.
+- Policies específicas por função.
+- Controle de acesso por usuário autenticado.
+- Controle de acesso do profissional aos próprios dados.
+- Controle de acesso do cliente aos próprios dados.
+- Controle administrativo restrito.
+- Tokens de videochamada gerados somente no backend.
+- Segredos somente em variáveis de ambiente.
+- Nunca colocar service_role key no frontend.
+- Nunca colocar chaves privadas do gateway de pagamento no frontend.
+- Webhooks validados.
+- Validação de inputs.
+- Prevenção de acesso indevido.
+- Proteção contra alterações de saldo.
+- Proteção contra falsificação de pagamento.
+- Logs de ações administrativas.
+
+Criar policies RLS completas e não apenas habilitar RLS sem policies.
+
+O administrador deve ser identificado de forma segura e não apenas por um campo de perfil que o usuário possa alterar.
+
+Criar mecanismo seguro de autorização administrativa.
+
+---
+
+# 17. EDGE FUNCTIONS
+
+Criar funções backend para:
+
+- Criar checkout de pagamento.
+- Validar pagamentos.
+- Processar webhook do gateway.
+- Confirmar agendamentos.
+- Gerar token LiveKit.
+- Autorizar entrada em sala.
+- Finalizar chamadas.
+- Calcular duração.
+- Registrar comissão.
+- Liberar saldo.
+- Processar cancelamentos.
+- Processar reembolsos.
+- Criar notificações.
+- Solicitar saques.
+- Aprovar saques.
+- Registrar auditoria.
+
+As funções devem verificar autenticação e autorização.
+
+---
+
+# 18. REGRAS DE COBRANÇA
+
+Preparar o sistema para duas modalidades:
+
+## Modalidade A — Sessão com duração definida
+
+Exemplo:
+
+- 10 minutos.
+- 15 minutos.
+- 30 minutos.
+- 60 minutos.
+
+O cliente paga antes e a chamada termina ao atingir o tempo contratado, respeitando as regras de tolerância configuradas.
+
+## Modalidade B — Cobrança por minuto
+
+Permitir cobrança por minuto, quando habilitada.
+
+Implementar essa modalidade somente quando houver uma forma confiável de controlar saldo, cobrança, limite de consumo e encerramento da chamada.
+
+Não permitir consumo ilimitado sem pagamento.
+
+O administrador deve poder ativar ou desativar cada modalidade.
+
+---
+
+# 19. RESPONSIVIDADE
+
+A plataforma deve funcionar perfeitamente em:
+
+- Computadores.
+- Notebooks.
+- Tablets.
+- Celulares Android.
+- iPhones.
+
+Priorizar experiência mobile para catálogo, pagamento, agenda e videochamada.
+
+---
+
+# 20. PÁGINAS E ROTAS
+
+Criar as seguintes páginas:
+
+## Públicas
+
+- /
+- /profissionais
+- /profissional/:slug
+- /como-funciona
+- /login
+- /cadastro
+- /termos
+- /privacidade
+- /suporte
+
+## Cliente
+
+- /cliente/dashboard
+- /cliente/perfil
+- /cliente/favoritos
+- /cliente/agendamentos
+- /cliente/chamadas
+- /cliente/pagamentos
+- /cliente/notificacoes
+
+## Profissional
+
+- /profissional/dashboard
+- /profissional/perfil
+- /profissional/agenda
+- /profissional/chamadas
+- /profissional/clientes
+- /profissional/financeiro
+- /profissional/saques
+- /profissional/notificacoes
+
+## Administrador
+
+- /admin/dashboard
+- /admin/profissionais
+- /admin/clientes
+- /admin/agendamentos
+- /admin/chamadas
+- /admin/pagamentos
+- /admin/financeiro
+- /admin/repasses
+- /admin/saques
+- /admin/relatorios
+- /admin/configuracoes
+- /admin/auditoria
+
+Proteger todas as rotas privadas.
+
+---
+
+# 21. RELATÓRIOS ADMINISTRATIVOS
+
+Criar relatórios com filtros por:
+
+- Período.
+- Profissional.
+- Cliente.
+- Status.
+- Tipo de chamada.
+- Pagamento.
+
+Indicadores:
+
+- Faturamento bruto.
+- Receita líquida da plataforma.
+- Comissões.
+- Valores dos profissionais.
+- Pagamentos aprovados.
+- Pagamentos recusados.
+- Reembolsos.
+- Total de chamadas.
+- Média de duração.
+- Ticket médio.
+- Profissionais mais rentáveis.
+- Clientes mais ativos.
+
+Permitir exportação CSV.
+
+---
+
+# 22. REGRAS DE NEGÓCIO IMPORTANTES
+
+- Profissionais somente poderão aparecer publicamente se aprovados e ativos.
+- O administrador controla os profissionais.
+- Um profissional só acessa seu próprio painel.
+- Clientes só acessam suas próprias informações.
+- Uma chamada só pode ocorrer quando autorizada.
+- Uma chamada paga deve estar vinculada ao pagamento ou saldo válido.
+- O sistema deve impedir cobranças duplicadas.
+- O sistema deve impedir reservas duplicadas.
+- O sistema deve impedir acesso a salas de terceiros.
+- O sistema deve registrar os eventos financeiros.
+- O sistema deve ter registro de cancelamentos.
+- O sistema deve ter registro de estornos.
+- O sistema deve ter registro de alterações administrativas.
+- Todos os horários devem ser armazenados corretamente, preferencialmente em UTC, com apresentação no fuso horário configurado.
+- Os dados financeiros devem utilizar precisão decimal adequada e não cálculos com floating point.
+- Não permitir alteração direta de saldo pelo frontend.
+
+---
+
+# 23. DADOS DE DEMONSTRAÇÃO
+
+Criar modo de demonstração para apresentar a plataforma.
+
+Criar:
+
+- 1 administrador de teste.
+- 3 profissionais fictícios.
+- 5 clientes fictícios.
+- Agendamentos fictícios.
+- Pagamentos de demonstração.
+- Gráficos com dados fictícios identificados.
+
+Nunca apresentar dados fictícios como se fossem dados reais.
+
+Criar opção para remover os dados de demonstração.
+
+Não criar senhas inseguras fixas em produção.
+
+---
+
+# 24. IMPLEMENTAÇÃO REAL, NÃO APENAS VISUAL
+
+Quero que você desenvolva a aplicação progressivamente, mas que cada módulo entregue tenha funcionalidade real.
+
+Não crie botões que não funcionam.
+
+Não crie formulários sem validação.
+
+Não crie gráficos com valores fixos se o banco já estiver disponível.
+
+Não crie login fictício que ignore a autenticação.
+
+Não simule pagamento aprovado sem indicar modo de demonstração.
+
+Não simule videochamada real com um vídeo gravado.
+
+Não use dados de demonstração misturados com dados reais.
+
+---
+
+# 25. PROCESSO DE DESENVOLVIMENTO
+
+Siga esta ordem:
+
+FASE 1 — Arquitetura
+
+- Defina a estrutura da aplicação.
+- Defina as rotas.
+- Defina os componentes.
+- Defina os tipos.
+- Defina as permissões.
+- Defina o fluxo de usuários.
+
+FASE 2 — SUPABASE
+
+- Conecte ao projeto Supabase.
+- Crie as tabelas.
+- Crie as migrations SQL.
+- Crie os relacionamentos.
+- Crie os índices.
+- Configure RLS.
+- Crie policies.
+- Configure Storage.
+- Crie funções e triggers.
+
+FASE 3 — AUTENTICAÇÃO
+
+- Criar cadastro de clientes.
+- Criar login.
+- Criar recuperação de senha.
+- Criar autorização por role.
+- Criar proteção de rotas.
+- Criar cadastro administrativo de profissionais.
+
+FASE 4 — FRONTEND
+
+- Criar páginas.
+- Criar layout.
+- Criar dashboard.
+- Criar catálogo.
+- Criar perfis.
+- Criar agenda.
+- Criar financeiro.
+- Criar painel administrativo.
+
+FASE 5 — PAGAMENTOS
+
+- Criar checkout.
+- Criar integração.
+- Criar webhooks.
+- Criar registros financeiros.
+- Criar comissões.
+- Criar repasses.
+
+FASE 6 — VIDEOCHAMADAS
+
+- Integrar LiveKit.
+- Criar salas privadas.
+- Criar tokens.
+- Criar controles.
+- Criar cronômetro.
+- Criar encerramento.
+- Criar logs.
+
+FASE 7 — TESTES
+
+Testar:
+
+- Cadastro.
+- Login.
+- Logout.
+- Recuperação de senha.
+- Permissões.
+- RLS.
+- Pagamentos.
+- Webhooks.
+- Agendamentos.
+- Videochamadas.
+- Repasses.
+- Cancelamentos.
+- Responsividade.
+- Segurança.
+
+FASE 8 — ENTREGA
+
+Apresentar:
+
+- Aplicação funcionando.
+- Estrutura de pastas.
+- Banco de dados.
+- Migrations SQL.
+- Policies RLS.
+- Edge Functions.
+- Variáveis de ambiente necessárias.
+- Instruções para configurar LiveKit.
+- Instruções para configurar gateway de pagamentos.
+- Instruções para colocar a aplicação em produção.
+
+---
+
+# 26. INSTRUÇÃO FINAL
+
+Comece desenvolvendo a plataforma com uma arquitetura profissional, visual premium e banco de dados real no Supabase.
+
+Não se limite a apresentar ideias, wireframes ou explicações.
+
+Implemente efetivamente o código e os componentes.
+
+Priorize inicialmente:
+
+1. Estrutura do projeto.
+2. Conexão com Supabase.
+3. Banco de dados.
+4. Autenticação.
+5. Controle de permissões.
+6. Painel administrativo.
+7. Cadastro e gerenciamento de profissionais.
+8. Catálogo público.
+9. Pagamentos.
+10. Videochamadas privadas.
+
+Se alguma integração exigir credenciais externas, crie a estrutura completa da integração e solicite somente as credenciais que forem realmente necessárias, explicando onde devem ser configuradas com segurança.
+
+Toda a plataforma deverá estar preparada para expansão, possuir código organizado, arquitetura escalável, segurança e experiência de uso profissional.
+
+**O objetivo é construir um sistema comercial real, e não apenas uma demonstração visual.**
